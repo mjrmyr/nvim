@@ -33,7 +33,14 @@ return {
         config = function()
             -- [[ Configure Telescope ]]
             -- See `:help telescope` and `:help telescope.setup()`
+            local actions = require("telescope.actions")
             require("telescope").setup({
+                defaults = {
+                    mappings = {
+                        i = { ["<S-CR>"] = actions.select_vertical },
+                        n = { ["<S-CR>"] = actions.select_vertical },
+                    },
+                },
                 extensions = {
                     ["ui-select"] = { require("telescope.themes").get_dropdown() },
                 },
