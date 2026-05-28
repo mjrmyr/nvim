@@ -37,6 +37,9 @@ end)
 -- Enable break indent
 vim.o.breakindent = true
 
+-- Enable linebreaks for more readability
+vim.o.linebreak = true
+
 -- Enable undo/redo changes even after closing and reopening a file
 vim.o.undofile = true
 
@@ -111,11 +114,19 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-vim.keymap.set("n", "<Space>t", function()
+
+-- Open a small terminal horizontally
+vim.keymap.set("n", "<Space>st", function()
     vim.cmd.vnew()
     vim.cmd.term()
     vim.cmd.wincmd("J")
     vim.api.nvim_win_set_height(0, 15)
+end)
+
+-- Open a normal terminal vertically
+vim.keymap.set("n", "<Space>t", function()
+    vim.cmd.vnew()
+    vim.cmd.term()
 end)
 
 -- TIP: Disable arrow keys in normal mode
@@ -132,6 +143,11 @@ vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left wind
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+
+-- Open a new vertical window with fresh buffer
+vim.keymap.set("n", "<C-w><C-n>", function()
+    vim.cmd.vnew()
+end)
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
