@@ -20,5 +20,6 @@
   "telescope.nvim": { "branch": "master", "commit": "7d324792b7943e4aa16ad007212e6acc6f9fe335" },
   "todo-comments.nvim": { "branch": "main", "commit": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668" },
   "typst-preview.nvim": { "branch": "master", "commit": "325036ee145ca51d9efb145c09ac16bce3bc8b7d" },
-  "yazi.nvim": { "branch": "main", "commit": "8a26074568790bb5c73e56eb871a74709a13dd43" }
+  "yazi.nvim": { "branch": "main", "commit": "8a26074568790bb5c73e56eb871a74709a13dd43" },
+  "zk": { "branch": "main", "commit": "bc3b39374b25fad977cecc936588cb060f15a773" }
 }
