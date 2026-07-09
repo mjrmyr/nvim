@@ -7,6 +7,8 @@ return {
         config = function()
             local zk = require("zk")
             local commands = require("zk.commands")
+            local zk_util = require("zk.util")
+            local telescope = require("telescope.builtin")
 
             -- ── Core setup ───────────────────────────────────────────────────────
             zk.setup({
@@ -107,6 +109,27 @@ return {
                 zk.new(opts)
             end)
 
+            -- Fuzzy-search files in the notebook's docs/ directory.
+            commands.add("ZkBrowseDocs", function()
+                local notebook_path = zk_util.resolve_notebook_path(0)
+                local notebook_root = notebook_path and zk_util.notebook_root(notebook_path)
+
+                if not notebook_root then
+                    vim.notify("zk: could not resolve notebook root", vim.log.levels.WARN)
+                    return
+                end
+
+                if vim.fn.isdirectory(notebook_root) == 0 then
+                    vim.notify("zk: docs directory not found: " .. notebook_root, vim.log.levels.WARN)
+                    return
+                end
+
+                telescope.live_grep({
+                    cwd = notebook_root,
+                    prompt_title = "Live Grep",
+                })
+            end)
+
             -- ── Global keymaps (<leader>z …) ─────────────────────────────────────
             local map = function(lhs, rhs, desc)
                 vim.keymap.set("n", lhs, rhs, { noremap = true, silent = true, desc = "zk: " .. desc })
@@ -121,6 +144,7 @@ return {
             -- Browsing
             map("<leader>zo", "<Cmd>ZkNotes<CR>", "[o]pen / search notes")
             map("<leader>zt", "<Cmd>ZkTags<CR>", "[t]ags picker")
+            map("<leader>zb", "<Cmd>ZkBrowseDocs<CR>", "[b]rowse docs")
 
             -- Full-text search inside notes
             map("<leader>zs", "<Cmd>ZkNotes { match = vim.fn.input('Search: ') }<CR>", "[s]earch in notes")
