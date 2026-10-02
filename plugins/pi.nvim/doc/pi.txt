@@ -1,0 +1,46 @@
+*pi.nvim* Pi RPC integration for Neovim
+
+===============================================================================
+USAGE                                                        *pi-nvim-usage*
+
+:PiChat                 Open the Pi chat window.
+:PiPrompt               Send a prompt to Pi.
+<leader>pc              Toggle the Pi chat window.
+{Visual}<leader>pq      Ask Pi about the selected code.
+
+Message types use distinct foreground/background highlights. Tool calls use
+their own background and are shown with their arguments, including bash commands
+and file paths when available.
+
+===============================================================================
+CONFIG                                                       *pi-nvim-config*
+
+Example: >lua
+  require('pi').setup({
+    cmd = { 'pi' },
+    temp_session = true,
+    width = 0.85,
+    height = 0.8,
+    block_margin = 1,
+    block_padding = 2,
+    mappings = {
+      toggle = '<leader>pc',
+      ask_selection = '<leader>pq',
+      close = 'q',
+      prompt = '<CR>',
+    },
+  })
+<
+
+pi.nvim always starts Pi in RPC mode by adding --mode rpc.
+
+When temp_session is true, pi.nvim uses a temporary Pi session directory for this
+Neovim instance. Reopening Pi resumes the same temporary session, and the storage
+is deleted on VimLeavePre.
+
+block_margin controls blank lines between message/tool blocks. block_padding controls
+spaces added to both sides of highlighted blocks.
+
+Set any mapping to false to disable it.
+
+vim:tw=78:ts=8:ft=help:norl:
