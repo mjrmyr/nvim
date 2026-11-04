@@ -77,7 +77,7 @@ function M.apply()
 
     local theme = find_theme(id)
     if not theme then
-        vim.notify("rex_theme: Rex theme '" .. id .. "' not found", vim.log.levels.WARN)
+        vim.notify("rex.nvim: Rex theme '" .. id .. "' not found", vim.log.levels.WARN)
         return
     end
 
@@ -90,7 +90,7 @@ function M.setup()
     M.apply()
     -- Pick up theme or appearance switches made while Neovim was in the background.
     vim.api.nvim_create_autocmd("FocusGained", {
-        group = vim.api.nvim_create_augroup("rex-theme", { clear = true }),
+        group = vim.api.nvim_create_augroup("rex.theme", { clear = true }),
         callback = M.apply,
     })
 end

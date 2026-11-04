@@ -6,9 +6,6 @@ vim.g.maplocalleader = " "
 
 require("config.lazy")
 
--- Match the colorscheme to the active Rex terminal theme
-require("config.rex_theme").setup()
-
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = false
 
