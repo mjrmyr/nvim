@@ -1,7 +1,6 @@
 return {
     {
-        dir = vim.fn.stdpath("config") .. "/rex.nvim",
-        name = "rex.nvim",
+        "mjrmyr/rex.nvim",
         main = "rex",
         lazy = false,
         priority = 1000,
